@@ -2,28 +2,42 @@ import React, { useState } from "react"
 import './TodoInput.css'
 
 
-function TodoInput() {
+function TodoInput(props) {
 
-  let [inputtext, setInputText] = useState("");
+  let [inputText, setInputText] = useState("");
+  const handleEnterPress = (e) => {
+
+    if(e.keyCode === 13``){
+
+      props.addList(inputText)
+      setInputText("")
+    }
+  }
 
   return (
     <div className="input-container">
 
       < input
-        type="email"
+        type="text"
         className=" input-box-todo"
         placeholder="Enter your ToDo Bruh ..."
+        value={inputText}
         onChange={e => {
 
           setInputText = (e.target.value)
 
         }}
+        onKeyDown={handleEnterPress}
 
       />
 
-      <button className="add-btn"> + </button>
+      <button className="add-btn" onClick={() => {
+        props.addList(inputText);
+        setInputText("")
+      }
+      }> + </button>
 
-      <div>{inputtext}</div>
+      {/* <div>{inputText}</div> */}
 
 
     </div>
